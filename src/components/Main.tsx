@@ -4,15 +4,7 @@ import UserContext, { useUser } from "../context/UserContext";
 
 export default function Main(): JSX.Element {
   const { users, setUsers } = useUser();
-  const [data, setData] = useState();
-  const icon = [
-    "icons/user.png",
-    "icons/mail.png",
-    "icons/calender.png",
-    "icons/map.png",
-    "icons/phone.png",
-    "icons/password.png",
-  ];
+
   const style = {
     name: {
       display: "block",
@@ -23,7 +15,6 @@ export default function Main(): JSX.Element {
       borderRadius: "50%",
       width: "300px",
       border: "1px solid white",
-      // padding: "10px",
     },
     outer: {
       marginTop: "20vh",
@@ -37,7 +28,6 @@ export default function Main(): JSX.Element {
       color: "white",
     },
   };
-  console.log(users[0]);
 
   return (
     <div style={style.outer}>
@@ -50,15 +40,7 @@ export default function Main(): JSX.Element {
           {users[0]?.name.title} {users[0]?.name.first} {users[0]?.name.last}
         </span>
       </p>
-      <div>
-        {icon.map((e: string, i) => {
-          return (
-            <Button key={i} className="mx-2 btn-primary" onClick={() => {}}>
-              <img src={e} alt="" />
-            </Button>
-          );
-        })}
-      </div>
+      <div></div>
     </div>
   );
 }

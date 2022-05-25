@@ -6,6 +6,7 @@ import React, {
   useState,
 } from "react";
 import { User, UserContextType } from "../types/type";
+
 const initial = {
   users: [],
   setUsers: () => {},
@@ -17,7 +18,7 @@ export const useUser: () => UserContextType = () => {
   return useContext(UserContext);
 };
 
-const UserProvider: React.FC<ReactElement> | any = ({ children }: any) => {
+const UserProvider: React.FC<ReactElement | any> = ({ children }: any) => {
   const [users, setUsers] = useState<User[]>([]);
   useEffect(() => {
     fetch("https://randomuser.me/api/")
