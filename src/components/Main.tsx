@@ -3,7 +3,8 @@ import { Button } from "react-bootstrap";
 import UserContext, { useUser } from "../context/UserContext";
 
 export default function Main(): JSX.Element {
-  function clickHandler() {}
+  const { users, setUsers } = useUser();
+  const [data, setData] = useState();
   const icon = [
     "icons/user.png",
     "icons/mail.png",
@@ -36,7 +37,6 @@ export default function Main(): JSX.Element {
       color: "white",
     },
   };
-  const { users, setUsers } = useUser();
   console.log(users[0]);
 
   return (
@@ -53,7 +53,7 @@ export default function Main(): JSX.Element {
       <div>
         {icon.map((e: string, i) => {
           return (
-            <Button key={i} className="mx-2 btn-primary" onClick={clickHandler}>
+            <Button key={i} className="mx-2 btn-primary" onClick={() => {}}>
               <img src={e} alt="" />
             </Button>
           );
