@@ -1,32 +1,29 @@
-import { useEffect, useState } from "react";
+import { useUser } from "../context/UserContext";
+import React, { useState, useEffect } from "react";
 import { getUsers } from "../API/services";
 import { User } from "../types/type";
 
 export default function AddUser() {
-  const [users, setUsers] = useState<User[]>([]);
+  const { users, setUsers } = useUser();
   const [tempUser, setTempUser] = useState<any>();
+
+  useEffect(() => {
+    setUsers(JSON.parse(localStorage.getItem("users") || "[]"));
+  }, []);
 
   function generateNew() {
     getUsers()
       .then((res) => res.json())
       .then((res) => {
-        console.log(res.results[0]);
-        const toDo = res.results[0] as User;
-        setTempUser(toDo);
+        setTempUser(res.results[0]);
       });
   }
-  useEffect(() => {
-    setUsers(JSON.parse(localStorage.getItem("users") || "[]"));
-  }, []);
 
   function reLoad() {
     window.location.reload();
   }
 
   function addToList() {
-    console.log(tempUser);
-    // users.push(tempUser);
-
     setUsers([...users, tempUser]);
     localStorage.setItem("users", JSON.stringify(users));
   }

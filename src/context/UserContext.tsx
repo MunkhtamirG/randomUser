@@ -2,7 +2,6 @@ import React, {
   createContext,
   ReactElement,
   useContext,
-  useEffect,
   useState,
 } from "react";
 import { User, UserContextType } from "../types/type";

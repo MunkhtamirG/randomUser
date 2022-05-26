@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import UserContext, { useUser } from "../context/UserContext";
+import { useUser } from "../context/UserContext";
 
 export default function Main(): JSX.Element {
   const { users, setUsers } = useUser();
