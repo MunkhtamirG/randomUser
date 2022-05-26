@@ -4,12 +4,15 @@ import { User } from "../types/type";
 
 export default function AddUser() {
   const [users, setUsers] = useState<User[]>([]);
+  const [tempUser, setTempUser] = useState<any>();
 
   function generateNew() {
     getUsers()
       .then((res) => res.json())
       .then((res) => {
-        setUsers([...users, res.results[0]]);
+        console.log(res.results[0]);
+        const toDo = res.results[0] as User;
+        setTempUser(toDo);
       });
   }
   useEffect(() => {
@@ -21,6 +24,10 @@ export default function AddUser() {
   }
 
   function addToList() {
+    console.log(tempUser);
+    // users.push(tempUser);
+
+    setUsers([...users, tempUser]);
     localStorage.setItem("users", JSON.stringify(users));
   }
 
@@ -30,25 +37,25 @@ export default function AddUser() {
 
   return (
     <div>
-      {users[0] ? (
+      {tempUser ? (
         <div style={style}>
           <div className="d-flex align-items-center justify-content-center">
             <div>
-              <img src={users[users.length - 1].picture.large} alt="" />
+              <img src={tempUser.picture.large} alt="" />
             </div>
             <div>
               <p>
                 Name:{" "}
                 <span>
-                  {users[users.length - 1].name.title} {users[0].name.first}{" "}
-                  {users[users.length - 1].name.last}
+                  {tempUser.name.title} {tempUser.name.first}{" "}
+                  {tempUser.name.last}
                 </span>
               </p>
-              <p>Age: {users[users.length - 1].dob.age}</p>
-              <p>Gender: {users[users.length - 1].gender}</p>
-              <p>Email: {users[users.length - 1].email}</p>
-              <p>Phone: {users[users.length - 1].phone}</p>
-              <p>Birthday: {users[users.length - 1].dob.date}</p>
+              <p>Age: {tempUser.dob.age}</p>
+              <p>Gender: {tempUser.gender}</p>
+              <p>Email: {tempUser.email}</p>
+              <p>Phone: {tempUser.phone}</p>
+              <p>Birthday: {tempUser.dob.date}</p>
             </div>
           </div>
           <div>
