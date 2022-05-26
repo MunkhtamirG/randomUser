@@ -1,7 +1,8 @@
 import { useUser } from "../context/UserContext";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getUsers } from "../API/services";
-import { User } from "../types/type";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function AddUser() {
   const { users, setUsers } = useUser();
@@ -23,8 +24,19 @@ export default function AddUser() {
     window.location.reload();
   }
 
-  function addToList() {
+  function notify() {
+    toast("Already exist");
+  }
+
+  function addToList(event: any) {
     setUsers([...users, tempUser]);
+    users.map((e) => {
+      if (e.picture.large === tempUser.picture.large) {
+        setUsers(users);
+        notify();
+        event.target.disabled = true;
+      }
+    });
     localStorage.setItem("users", JSON.stringify(users));
   }
 
@@ -56,7 +68,11 @@ export default function AddUser() {
             </div>
           </div>
           <div>
-            <button className="btn btn-warning mx-2" onClick={addToList}>
+            <button
+              className="btn btn-warning mx-2"
+              onClick={addToList}
+              name="buttonForAdd"
+            >
               Add User To List
             </button>
             <button className="btn btn-warning mx-2" onClick={generateNew}>
@@ -65,6 +81,7 @@ export default function AddUser() {
             <button className="btn btn-warning mx-2" onClick={reLoad}>
               Cancel
             </button>
+            <ToastContainer />
           </div>
         </div>
       ) : (

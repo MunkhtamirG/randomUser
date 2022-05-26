@@ -40,7 +40,11 @@ export default function Main(): JSX.Element {
 
   return (
     <div style={style.outer}>
-      <img src={users[0]?.picture.large} alt="" style={style.picture} />
+      <img
+        src={users[Math.floor(Math.random() * users.length)]?.picture.large}
+        alt=""
+        style={style.picture}
+      />
       <hr style={style.hr} />
 
       <p>
