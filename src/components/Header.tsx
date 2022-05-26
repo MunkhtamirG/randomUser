@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Header(): JSX.Element {
   const style = {
@@ -13,10 +14,18 @@ export default function Header(): JSX.Element {
   return (
     <div style={style.outer}>
       <div style={style.inner}>
-        <button className="btn btn-warning">Home</button>
-        <button className="btn btn-warning">Users</button>
-        <button className="btn btn-warning">Add User</button>
-        <button className="btn btn-warning">Not Found</button>
+        <Link to={"/"} className="btn btn-warning">
+          Home
+        </Link>
+        <Link to={"/users"} className="btn btn-warning">
+          Users
+        </Link>
+        <Link to={"/adduser"} className="btn btn-warning">
+          Add User
+        </Link>
+        <Link to={"/notfound"} className="btn btn-warning">
+          Not Found
+        </Link>
       </div>
     </div>
   );

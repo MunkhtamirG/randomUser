@@ -8,6 +8,8 @@ export interface User {
   email: string;
   phone: number;
   birthday: Date;
+  dob: number | any;
+
   picture: { large: string };
 }
 

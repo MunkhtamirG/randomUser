@@ -4,6 +4,14 @@ import UserContext, { useUser } from "../context/UserContext";
 
 export default function Main(): JSX.Element {
   const { users, setUsers } = useUser();
+  const icons = [
+    "icons/user.png",
+    "icons/mail.png",
+    "icons/calender.png",
+    "icons/map.png",
+    "icons/phone.png",
+    "icons/password.png",
+  ];
 
   const style = {
     name: {
@@ -29,6 +37,8 @@ export default function Main(): JSX.Element {
     },
   };
 
+  function clickHandler() {}
+
   return (
     <div style={style.outer}>
       <img src={users[0]?.picture.large} alt="" style={style.picture} />
@@ -40,7 +50,26 @@ export default function Main(): JSX.Element {
           {users[0]?.name.title} {users[0]?.name.first} {users[0]?.name.last}
         </span>
       </p>
-      <div></div>
+      <div>
+        <Button>
+          <img src={icons[0]} alt="" onClick={clickHandler} />
+        </Button>
+        <Button>
+          <img src={icons[1]} alt="" />
+        </Button>
+        <Button>
+          <img src={icons[2]} alt="" />
+        </Button>
+        <Button>
+          <img src={icons[3]} alt="" />
+        </Button>
+        <Button>
+          <img src={icons[4]} alt="" />
+        </Button>
+        <Button>
+          <img src={icons[5]} alt="" />
+        </Button>
+      </div>
     </div>
   );
 }
