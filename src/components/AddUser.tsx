@@ -13,10 +13,11 @@ export default function AddUser() {
     getUsers()
       .then((res) => res.json())
       .then((res) => {
-        console.log(res.results[0].picture.large);
-        console.log(users);
-
-        if (users.includes(res.results[0].picture.large)) {
+        if (
+          users.filter(
+            (user) => user.picture.large === res.results[0].picture.large
+          ).length > 0
+        ) {
           setBtn(true);
           notify();
         } else {

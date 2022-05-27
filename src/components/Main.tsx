@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 
 export default function Main(): JSX.Element {
@@ -36,8 +38,6 @@ export default function Main(): JSX.Element {
     },
   };
 
-  function clickHandler() {}
-
   return (
     <div style={style.outer}>
       <img
@@ -50,26 +50,28 @@ export default function Main(): JSX.Element {
       <p>
         Hi, My name is
         <span style={style.name}>
-          {users[0]?.name.title} {users[0]?.name.first} {users[0]?.name.last}
+          {users[Math.floor(Math.random() * users.length)]?.name.title}{" "}
+          {users[Math.floor(Math.random() * users.length)]?.name.first}{" "}
+          {users[0]?.name.last}
         </span>
       </p>
       <div>
-        <Button>
-          <img src={icons[0]} alt="" onClick={clickHandler} />
+        <Button className="mx-2">
+          <img src={icons[0]} alt="" />
         </Button>
-        <Button>
+        <Button className="mx-2">
           <img src={icons[1]} alt="" />
         </Button>
-        <Button>
+        <Button className="mx-2">
           <img src={icons[2]} alt="" />
         </Button>
-        <Button>
+        <Button className="mx-2">
           <img src={icons[3]} alt="" />
         </Button>
-        <Button>
+        <Button className="mx-2">
           <img src={icons[4]} alt="" />
         </Button>
-        <Button>
+        <Button className="mx-2">
           <img src={icons[5]} alt="" />
         </Button>
       </div>
