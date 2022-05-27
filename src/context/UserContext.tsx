@@ -3,6 +3,7 @@ import React, {
   ReactElement,
   useContext,
   useState,
+  useEffect,
 } from "react";
 import { User, UserContextType } from "../types/type";
 
@@ -19,6 +20,10 @@ export const useUser: () => UserContextType = () => {
 
 const UserProvider: React.FC<ReactElement | any> = ({ children }: any) => {
   const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    setUsers(JSON.parse(localStorage.getItem("users") || "[]"));
+  }, []);
 
   return (
     <UserContext.Provider value={{ users, setUsers }}>

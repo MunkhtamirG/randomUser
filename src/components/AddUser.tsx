@@ -7,54 +7,59 @@ import "react-toastify/dist/ReactToastify.css";
 export default function AddUser() {
   const { users, setUsers } = useUser();
   const [tempUser, setTempUser] = useState<any>();
-
-  useEffect(() => {
-    setUsers(JSON.parse(localStorage.getItem("users") || "[]"));
-  }, []);
+  const [btn, setBtn] = useState<boolean>(true);
 
   function generateNew() {
     getUsers()
       .then((res) => res.json())
       .then((res) => {
-        setTempUser(res.results[0]);
+        console.log(res.results[0].picture.large);
+        console.log(users);
+
+        if (users.includes(res.results[0].picture.large)) {
+          setBtn(true);
+          notify();
+        } else {
+          setBtn(false);
+          setTempUser(res.results[0]);
+        }
       });
   }
 
-  function reLoad() {
-    window.location.reload();
+  function cancelBtn() {
+    setTempUser(null);
   }
 
   function notify() {
     toast("Already exist");
   }
 
-  function addToList(event: any) {
-    setUsers([...users, tempUser]);
-    users.map((e) => {
-      if (e.picture.large === tempUser.picture.large) {
-        setUsers(users);
-        notify();
-        event.target.disabled = true;
-      }
-    });
-    localStorage.setItem("users", JSON.stringify(users));
+  function addToList() {
+    if (users.includes(tempUser)) {
+      setBtn(true);
+      notify();
+    } else {
+      setBtn(true);
+      setUsers([...users, tempUser]);
+      localStorage.setItem("users", JSON.stringify(users));
+    }
   }
 
-  const style = {
+  const mainStyle = {
     marginTop: "30vh",
   };
 
   return (
     <div>
       {tempUser ? (
-        <div style={style}>
+        <div style={mainStyle}>
           <div className="d-flex align-items-center justify-content-center">
             <div>
               <img src={tempUser.picture.large} alt="" />
             </div>
             <div>
               <p>
-                Name:{" "}
+                Name:
                 <span>
                   {tempUser.name.title} {tempUser.name.first}{" "}
                   {tempUser.name.last}
@@ -71,21 +76,25 @@ export default function AddUser() {
             <button
               className="btn btn-warning mx-2"
               onClick={addToList}
-              name="buttonForAdd"
+              disabled={btn}
             >
               Add User To List
             </button>
             <button className="btn btn-warning mx-2" onClick={generateNew}>
               Generate New
             </button>
-            <button className="btn btn-warning mx-2" onClick={reLoad}>
+            <button className="btn btn-warning mx-2" onClick={cancelBtn}>
               Cancel
             </button>
             <ToastContainer />
           </div>
         </div>
       ) : (
-        <button onClick={generateNew} className="btn btn-danger" style={style}>
+        <button
+          onClick={generateNew}
+          className="btn btn-danger"
+          style={mainStyle}
+        >
           Generate Random Users
         </button>
       )}

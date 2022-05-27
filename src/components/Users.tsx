@@ -2,9 +2,6 @@ import { useEffect } from "react";
 import { useUser } from "../context/UserContext";
 export default function Users(): JSX.Element {
   const { users, setUsers } = useUser();
-  useEffect(() => {
-    setUsers(JSON.parse(localStorage.getItem("users") || "[]"));
-  }, []);
 
   const style = {
     border: "6px solid white",
