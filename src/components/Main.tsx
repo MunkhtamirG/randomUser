@@ -1,10 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { getDataFromUsers } from "../API/services";
 import { useUser } from "../context/UserContext";
 
 export default function Main(): JSX.Element {
   const { users, setUsers } = useUser();
+  const [randomUser, setRandomUser] = useState<any>();
+  const [intro, setIntro] = useState<any>();
+  const [mainText, setMainText] = useState<any>();
   const icons = [
     "icons/user.png",
     "icons/mail.png",
@@ -24,9 +27,10 @@ export default function Main(): JSX.Element {
       borderRadius: "50%",
       width: "300px",
       border: "1px solid white",
+      marginBottom: "40px",
     },
     outer: {
-      marginTop: "20vh",
+      marginTop: "18vh",
     },
     hr: {
       width: "100%",
@@ -38,41 +42,110 @@ export default function Main(): JSX.Element {
     },
   };
 
+  useEffect(() => {
+    setRandomUser(users[Math.floor(Math.random() * users.length)]);
+  }, [users]);
+
+  useEffect(() => {
+    getDataFromUsers()
+      .then((e) => e.json())
+      .then((e) => {
+        setIntro(e.name);
+      });
+  }, []);
+
+  useEffect(() => {
+    setMainText(
+      randomUser?.name.title +
+        " " +
+        randomUser?.name.first +
+        " " +
+        randomUser?.name.last
+    );
+  }, [randomUser]);
+
+  function clickhandler(e: any) {
+    if (e.target.alt === "name") {
+      getDataFromUsers()
+        .then((e) => e.json())
+        .then((e) => {
+          setIntro(e.name);
+          setMainText(
+            randomUser.name.title +
+              " " +
+              randomUser.name.first +
+              " " +
+              randomUser.name.last
+          );
+        });
+    } else if (e.target.alt === "mail") {
+      getDataFromUsers()
+        .then((e) => e.json())
+        .then((e) => {
+          setIntro(e.mail);
+          setMainText(randomUser.email);
+        });
+    } else if (e.target.alt === "calender") {
+      getDataFromUsers()
+        .then((e) => e.json())
+        .then((e) => {
+          setIntro(e.calender);
+          setMainText(randomUser.dob.date);
+        });
+    } else if (e.target.alt === "map") {
+      getDataFromUsers()
+        .then((e) => e.json())
+        .then((e) => {
+          setIntro(e.map);
+          setMainText(
+            randomUser.location.country + " " + randomUser.location.city
+          );
+        });
+    } else if (e.target.alt === "phone") {
+      getDataFromUsers()
+        .then((e) => e.json())
+        .then((e) => {
+          setIntro(e.phone);
+          setMainText(randomUser.phone);
+        });
+    } else if (e.target.alt === "password") {
+      getDataFromUsers()
+        .then((e) => e.json())
+        .then((e) => {
+          setIntro(e.password);
+
+          setMainText(randomUser.login.password);
+        });
+    }
+  }
+
   return (
     <div style={style.outer}>
-      <img
-        src={users[Math.floor(Math.random() * users.length)]?.picture.large}
-        alt=""
-        style={style.picture}
-      />
+      <img src={randomUser?.picture.large} alt="" style={style.picture} />
       <hr style={style.hr} />
 
       <p>
-        Hi, My name is
-        <span style={style.name}>
-          {users[Math.floor(Math.random() * users.length)]?.name.title}{" "}
-          {users[Math.floor(Math.random() * users.length)]?.name.first}{" "}
-          {users[0]?.name.last}
-        </span>
+        {intro && intro}
+        <span style={style.name}>{mainText && mainText}</span>
       </p>
       <div>
-        <Button className="mx-2">
-          <img src={icons[0]} alt="" />
+        <Button className="mx-2" name="name" onMouseOver={clickhandler}>
+          <img src={icons[0]} alt="name" />
         </Button>
-        <Button className="mx-2">
-          <img src={icons[1]} alt="" />
+        <Button className="mx-2" onMouseOver={clickhandler}>
+          <img src={icons[1]} alt="mail" />
         </Button>
-        <Button className="mx-2">
-          <img src={icons[2]} alt="" />
+        <Button className="mx-2" onMouseOver={clickhandler}>
+          <img src={icons[2]} alt="calender" />
         </Button>
-        <Button className="mx-2">
-          <img src={icons[3]} alt="" />
+        <Button className="mx-2" onMouseOver={clickhandler}>
+          <img src={icons[3]} alt="map" />
         </Button>
-        <Button className="mx-2">
-          <img src={icons[4]} alt="" />
+        <Button className="mx-2" onMouseOver={clickhandler}>
+          <img src={icons[4]} alt="phone" />
         </Button>
-        <Button className="mx-2">
-          <img src={icons[5]} alt="" />
+        <Button className="mx-2" onMouseOver={clickhandler}>
+          <img src={icons[5]} alt="password" />
         </Button>
       </div>
     </div>

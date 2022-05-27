@@ -1,20 +1,8 @@
 {
-  "name": {
-    "intro": "Hello, my name is"
-  },
-  "mail": {
-    "intro": "Hello, my email is"
-  },
-  "calender": {
-    "intro": "Hello, my date of birth is"
-  },
-  "map": {
-    "intro": "Hello, my location is"
-  },
-  "phone": {
-    "intro": "Hello, my phone number is"
-  },
-  "password": {
-    "intro": "Hello, my password is"
-  }
+  "name": "Hello, my name is",
+  "mail": "Hello, my email is",
+  "calender": "Hello, my date of birth is",
+  "map": "Hello, my location is",
+  "phone": "Hello, my phone number is",
+  "password": "Hello, my password is"
 }
