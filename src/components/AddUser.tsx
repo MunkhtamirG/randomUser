@@ -3,6 +3,7 @@ import { useState } from "react";
 import { getUsers } from "../API/services";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { User } from "../types/type";
 
 export default function AddUser() {
   const { users, setUsers } = useUser();
@@ -48,6 +49,7 @@ export default function AddUser() {
 
   const mainStyle = {
     marginTop: "30vh",
+    button: { marginTop: "30vh" },
   };
 
   return (
@@ -58,7 +60,7 @@ export default function AddUser() {
             <div>
               <img src={tempUser.picture.large} alt="" />
             </div>
-            <div>
+            <div className="text-light">
               <p>
                 Name:
                 <span>
@@ -94,7 +96,7 @@ export default function AddUser() {
         <button
           onClick={generateNew}
           className="btn btn-danger"
-          style={mainStyle}
+          style={mainStyle.button}
         >
           Generate Random Users
         </button>

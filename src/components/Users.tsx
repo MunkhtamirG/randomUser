@@ -9,7 +9,7 @@ export default function Users(): JSX.Element {
 
   return (
     <div className="p-4">
-      <h2>Male</h2>
+      <h2 className="text-light">Male</h2>
       {users &&
         users
           .filter((user) => user.gender === "male")
@@ -24,7 +24,7 @@ export default function Users(): JSX.Element {
               />
             );
           })}
-      <h2>Female</h2>
+      <h2 className="text-light">Female</h2>
       {users &&
         users
           .filter((user) => user.gender === "female")

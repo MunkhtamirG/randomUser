@@ -22,12 +22,17 @@ export default function Main(): JSX.Element {
       display: "block",
       fontSize: "25px",
       fontWeight: "700",
+      color: "white",
     },
     picture: {
       borderRadius: "50%",
-      width: "300px",
-      border: "1px solid white",
+      width: "200px",
+      border: "1px solid transparent",
       marginBottom: "40px",
+      backgroundColor: "#1de9b6",
+      borderColor: "#1de9b6",
+      boxShadow: " 0 10px 16px rgb(29 233 182 / 30%)",
+      padding: "5px",
     },
     outer: {
       marginTop: "18vh",
@@ -36,9 +41,11 @@ export default function Main(): JSX.Element {
       width: "100%",
       height: "3px",
       position: "absolute" as "absolute",
-      top: "40vh",
+      top: "36vh",
+      left: "0",
       zIndex: "-1",
-      color: "white",
+      backgroundColor: "#1de9b6",
+      boxShadow: " 0 10px 16px rgb(29 233 182 / 70%)",
     },
   };
 
@@ -122,9 +129,10 @@ export default function Main(): JSX.Element {
   return (
     <div style={style.outer}>
       <img src={randomUser?.picture.large} alt="" style={style.picture} />
-      <hr style={style.hr} />
 
-      <p>
+      <span style={style.hr}></span>
+
+      <p className="text-light">
         {intro && intro}
         <span style={style.name}>{mainText && mainText}</span>
       </p>
