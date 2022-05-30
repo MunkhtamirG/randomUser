@@ -4,6 +4,7 @@ import { getUsers } from "../API/services";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { User } from "../types/type";
+import { ParameterDeclaration } from "typescript";
 
 export default function AddUser() {
   const { users, setUsers } = useUser();

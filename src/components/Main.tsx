@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { getDataFromUsers } from "../API/services";
 import { useUser } from "../context/UserContext";
+import { User } from "../types/type";
 
 export default function Main(): JSX.Element {
   const { users, setUsers } = useUser();
   const [randomUser, setRandomUser] = useState<any>();
-  const [intro, setIntro] = useState<any>();
-  const [mainText, setMainText] = useState<any>();
+  const [intro, setIntro] = useState<string>();
+  const [mainText, setMainText] = useState<string>();
   const icons = [
     "icons/user.png",
     "icons/mail.png",
