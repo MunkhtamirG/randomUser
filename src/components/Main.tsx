@@ -35,7 +35,7 @@ export default function Main(): JSX.Element {
       padding: "5px",
     },
     outer: {
-      marginTop: "18vh",
+      marginTop: "20vh",
     },
     hr: {
       width: "100%",

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useUser } from "../context/UserContext";
 export default function Users(): JSX.Element {
   const { users, setUsers } = useUser();
